@@ -1,8 +1,11 @@
+#imports tkinter and PIL
 from tkinter import *
 from PIL import ImageTk, Image
 
+#intializes tkinter
 root = Tk()
 
+#intializes a frame to connect the later canvas to
 frame = Frame(root)
 prompt = StringVar()
 
@@ -12,6 +15,7 @@ characters = ["Hilda", "Hyde", "Chaos"]
 #creates list of moves
 moves = ["2b", "5b", "2c"]
 
+#creates an initial canvas to later modify
 canvas = Canvas(root, height = 1, width = 1)
 
 #sets title of the program
@@ -40,7 +44,7 @@ x.pack(side=TOP, anchor=NW)
 characterSelection = ''
 moveSelection = ''
 
-#creates button
+#creates a load button
 class HelloButton(Button):
     def __init__(self, parent=None, **config):
         Button.__init__(self, parent, config)
@@ -49,25 +53,34 @@ class HelloButton(Button):
     def callback(self):
         self.quit()
 
+#load image class that will load the first image
 def loadImage():
     
+    #opens the image in an image object, setting the path of the file to a variable
     img = Image.open('Hilda-5b.png')
     filename = ImageTk.PhotoImage(img)
 
+    #creates a canvas that is the size of the image, setting the image on the canvas as the image previously loaded
     canvas = Canvas(root, height = img.size[0], width = img.size[0])
     canvas.image = filename
+    
+    #creates the image, anchoring and packing it to view
     canvas.create_image(0,0, anchor = NW, image=filename)
     canvas.pack()
 
-
-#gets the selection from the menus
+#allows the button to perform functions
 class MyButton(HelloButton):
     def callback(self):
+        
+        #gets the current selection from the dropdown menues
         characterSelection = characterMenu.get()
         moveSelection = moveMenu.get()
+        
         #prints the selections from the dropdown menu for reference
         print(characterMenu.get())
         print(moveMenu.get())
+        
+        #calls loadImage to load the proper image if that particular image is called for.
         if characterSelection == "Hilda":
             if moveSelection == "5b":
                 loadImage()
