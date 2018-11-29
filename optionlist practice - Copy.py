@@ -13,6 +13,7 @@ characters = ["Hilda", "Hyde", "Chaos"]
 moves = ["2b", "5b", "2c"]
 
 canvas = Canvas(root, height = 1, width = 1)
+
 #sets title of the program
 root.title("UNIST Hitbox Viewer")
 
@@ -47,7 +48,18 @@ class HelloButton(Button):
         self.config(command=self.callback)
     def callback(self):
         self.quit()
-       
+
+def loadImage():
+    
+    img = Image.open('Hilda-5b.png')
+    filename = ImageTk.PhotoImage(img)
+
+    canvas = Canvas(root, height = img.size[0], width = img.size[0])
+    canvas.image = filename
+    canvas.create_image(0,0, anchor = NW, image=filename)
+    canvas.pack()
+
+
 #gets the selection from the menus
 class MyButton(HelloButton):
     def callback(self):
@@ -57,21 +69,9 @@ class MyButton(HelloButton):
         print(characterMenu.get())
         print(moveMenu.get())
         if characterSelection == "Hilda":
-            loadImage()
+            if moveSelection == "5b":
+                loadImage()
 
-
-#img = ImageTk.PhotoImage(Image.open('C:/Users/tcarver5/Desktop/code/Hilda-5b.png'))
-#with Image.open('C:/Users/tcarver5/Desktop/code/Hilda-5b.png') as image_size:
-    #width, height = image_size.size
-def loadImage():
-    img = Image.open('C:/Users/tcarver5/Desktop/code/Hilda-5b.png')
-    filename = ImageTk.PhotoImage(img)
-
-    canvas = Canvas(root, height = img.size[0], width = img.size[0])
-    canvas.image = filename
-    canvas.create_image(150,150, image=filename)
-    canvas.pack()
-#canvas.create_image(150, 150, anchor = CENTER, image=img)
 
 if __name__ == "__main__":
     MyButton(None, text="Load").mainloop()
