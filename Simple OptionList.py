@@ -6,6 +6,7 @@ characters = ["Hilda", "Hyde", "Chaos"]
 #creates list of moves
 moves = ["2b", "5b", "2c"]
 
+#initializes tkinter
 master = Tk()
 
 #sets title of the program
@@ -34,7 +35,7 @@ x.pack(side=TOP, anchor=W)
 characterSelection = ''
 moveSelection = ''
 
-#creates button
+#creates button load button
 class HelloButton(Button):
     def __init__(self, parent=None, **config):
         Button.__init__(self, parent, config)
@@ -43,11 +44,14 @@ class HelloButton(Button):
     def callback(self):
         self.quit()
         
-#gets the selection from the menus
+#allows the button to perform a function when it is pressed
 class MyButton(HelloButton):
     def callback(self):
+        
+        #retrieves the currently selected options from the two dropdown menues
         characterSelection = characterMenu.get()
         moveSelection = moveMenu.get()
+        
         #prints the selections from the dropdown menu for reference
         print( characterMenu.get())
         print( moveMenu.get())
